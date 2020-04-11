@@ -5,14 +5,14 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] float _speed = 4.0f;
-    private float yStartPos = 7f;
-    private float yBoundary = -5f;
-    private float xRange = 8f;
+    private float _yStartPos = 7f;
+    private float _yBoundary = -5f;
+    private float _xRange = 8f;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(0, yStartPos, 0);
+
     }
 
     // Update is called once per frame
@@ -20,10 +20,10 @@ public class EnemyController : MonoBehaviour
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if (transform.position.y < yBoundary)
+        if (transform.position.y < _yBoundary)
         {
-            float randomXPos = Random.Range(-xRange, xRange);
-            transform.position = new Vector3(randomXPos, yStartPos, 0);
+            float randomXPos = Random.Range(-_xRange, _xRange);
+            transform.position = new Vector3(randomXPos, _yStartPos, 0);
         }
     }
 
