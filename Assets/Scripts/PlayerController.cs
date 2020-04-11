@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _laserPrefab;
     [SerializeField] float _fireRate = 0.5f;
     private float _canFire = -1f;
+    [SerializeField] int _lives = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -37,16 +38,18 @@ public class PlayerController : MonoBehaviour
 
         float currentXPos = transform.position.x;
         float currentYPos = transform.position.y;
+        float yBoundary = -3.8f;
+        float xBoundary = 11f;
 
-        transform.position = new Vector3(currentXPos, Mathf.Clamp(currentYPos, -3.8f, 0), 0);
+        transform.position = new Vector3(currentXPos, Mathf.Clamp(currentYPos, yBoundary, 0), 0);
 
-        if (transform.position.x > 11)
+        if (transform.position.x > xBoundary)
         {
-            transform.position = new Vector3(-11, transform.position.y, 0);
+            transform.position = new Vector3(-xBoundary, transform.position.y, 0);
         }
-        else if (transform.position.x < -11)
+        else if (transform.position.x < -xBoundary)
         {
-            transform.position = new Vector3(11, transform.position.y, 0);
+            transform.position = new Vector3(xBoundary, transform.position.y, 0);
         }
     }
 
@@ -56,5 +59,15 @@ public class PlayerController : MonoBehaviour
 
         Vector3 _offset = transform.position + new Vector3(0, 0.8f, 0);
         Instantiate(_laserPrefab, _offset, Quaternion.identity);
+    }
+
+    public void Damage()
+    {
+        _lives--;
+
+        if (_lives < 1)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
