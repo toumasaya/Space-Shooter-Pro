@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float _speed = 3.5f;
+    private float _speedMultiplier = 2;
     [SerializeField] GameObject _laserPrefab;
     [SerializeField] GameObject _tripleShotPrefab;
 
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private SpawnManager _spawnManager;
 
     [SerializeField] bool _isTripleShotActive = false;
+    [SerializeField] bool _isSpeedBoostActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+
         transform.Translate(direction * _speed * Time.deltaTime);
 
         float currentXPos = transform.position.x;
@@ -102,5 +105,19 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
+    }
+
+    public void SpeedBoostActive()
+    {
+        _isSpeedBoostActive = true;
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedBoostPowerdownRoutine());
+    }
+
+    IEnumerator SpeedBoostPowerdownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isSpeedBoostActive = false;
+        _speed /= _speedMultiplier;
     }
 }
