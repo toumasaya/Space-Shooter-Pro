@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     {
         _canFire = Time.time + _fireRate;
 
-        Vector3 _offset = transform.position + new Vector3(0, 0.8f, 0);
+        Vector3 _offset = transform.position + new Vector3(0, 1.05f, 0);
         Instantiate(_laserPrefab, _offset, Quaternion.identity);
     }
 
