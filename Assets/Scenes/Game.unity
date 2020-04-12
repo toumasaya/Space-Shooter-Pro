@@ -152,6 +152,7 @@ MonoBehaviour:
   _lives: 3
   _isTripleShotActive: 0
   _isSpeedBoostActive: 0
+  _isShieldsActive: 0
 --- !u!212 &31769721
 SpriteRenderer:
   m_ObjectHideFlags: 0
