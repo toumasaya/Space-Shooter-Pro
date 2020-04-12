@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool _isTripleShotActive = false;
     [SerializeField] bool _isSpeedBoostActive = false;
     [SerializeField] bool _isShieldsActive = false;
+    [SerializeField] GameObject _shieldsVisualizer;
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
         if (_isShieldsActive == true)
         {
             _isShieldsActive = false;
+            _shieldsVisualizer.SetActive(false);
             return;
         }
 
@@ -131,5 +133,6 @@ public class PlayerController : MonoBehaviour
     public void ShieldsActive()
     {
         _isShieldsActive = true;
+        _shieldsVisualizer.SetActive(true);
     }
 }
