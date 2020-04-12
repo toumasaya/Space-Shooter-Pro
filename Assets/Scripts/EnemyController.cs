@@ -9,10 +9,12 @@ public class EnemyController : MonoBehaviour
     private float _yBoundary = -5f;
     private float _xRange = 8f;
 
+    private PlayerController _player;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        _player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -43,6 +45,11 @@ public class EnemyController : MonoBehaviour
         else if (other.CompareTag("Laser"))
         {
             Destroy(other.gameObject);
+
+            if (_player != null)
+            {
+                _player.AddScore(10);
+            }
             Destroy(this.gameObject);
         }
     }

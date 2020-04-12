@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int _lives = 3;
 
     private SpawnManager _spawnManager;
+    private UIManager _uiManager;
 
     [SerializeField] bool _isTripleShotActive = false;
     [SerializeField] bool _isSpeedBoostActive = false;
     [SerializeField] bool _isShieldsActive = false;
     [SerializeField] GameObject _shieldsVisualizer;
+
+    [SerializeField] int _score;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +29,16 @@ public class PlayerController : MonoBehaviour
         // take the current position = new position (0, 0, 0)
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
         if (_spawnManager == null)
         {
             Debug.LogError("SpawnManager is null");
+        }
+
+        if (_uiManager == null)
+        {
+            Debug.LogError("UI Manager is null");
         }
     }
 
@@ -134,5 +143,11 @@ public class PlayerController : MonoBehaviour
     {
         _isShieldsActive = true;
         _shieldsVisualizer.SetActive(true);
+    }
+
+    public void AddScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
     }
 }
