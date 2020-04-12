@@ -26,6 +26,12 @@ public class Powerup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            PlayerController player = other.transform.GetComponent<PlayerController>();
+
+            if (player != null)
+            {
+                player.TripleShotActive();
+            }
             Destroy(this.gameObject);
         }
     }
