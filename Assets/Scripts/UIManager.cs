@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] Text _scoreText;
+    [SerializeField] Image _livesImage;
+    [SerializeField] Sprite[] _livesSprites;
     PlayerController player;
 
     // Start is called before the first frame update
@@ -19,5 +21,10 @@ public class UIManager : MonoBehaviour
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore.ToString();
+    }
+
+    public void UpdateLives(int currentLives)
+    {
+        _livesImage.sprite = _livesSprites[currentLives];
     }
 }

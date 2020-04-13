@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _lives--;
+        _uiManager.UpdateLives(_lives);
 
         if (_lives < 1)
         {
