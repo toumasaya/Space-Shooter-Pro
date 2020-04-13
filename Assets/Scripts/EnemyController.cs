@@ -10,11 +10,23 @@ public class EnemyController : MonoBehaviour
     private float _xRange = 8f;
 
     private PlayerController _player;
+    private Animator _enemyDestroyAnim;
 
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<PlayerController>();
+        _enemyDestroyAnim = GetComponent<Animator>();
+
+        if (_player == null)
+        {
+            Debug.LogError("Player is null");
+        }
+
+        if (_enemyDestroyAnim == null)
+        {
+            Debug.LogError("Animator is null");
+        }
     }
 
     // Update is called once per frame
@@ -40,7 +52,9 @@ public class EnemyController : MonoBehaviour
                 player.Damage();
             }
 
-            Destroy(this.gameObject);
+            _enemyDestroyAnim.SetTrigger("OnEnemyDeath");
+            _speed = 0;
+            Destroy(this.gameObject, 2.7f);
         }
         else if (other.CompareTag("Laser"))
         {
@@ -50,7 +64,10 @@ public class EnemyController : MonoBehaviour
             {
                 _player.AddScore(10);
             }
-            Destroy(this.gameObject);
+
+            _enemyDestroyAnim.SetTrigger("OnEnemyDeath");
+            _speed = 0;
+            Destroy(this.gameObject, 2.7f);
         }
     }
 }
