@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private float _speedMultiplier = 2;
     [SerializeField] GameObject _laserPrefab;
     [SerializeField] GameObject _tripleShotPrefab;
+    [SerializeField] GameObject _leftEngine, _rightEngine;
 
     [SerializeField] float _fireRate = 0.5f;
     private float _canFire = -1f;
@@ -105,6 +106,16 @@ public class PlayerController : MonoBehaviour
         }
 
         _lives--;
+
+        if (_lives == 2)
+        {
+            _leftEngine.SetActive(true);
+        }
+        else if (_lives == 1)
+        {
+            _rightEngine.SetActive(true);
+        }
+
         _uiManager.UpdateLives(_lives);
 
         if (_lives < 1)
