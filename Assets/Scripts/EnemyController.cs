@@ -12,11 +12,14 @@ public class EnemyController : MonoBehaviour
     private PlayerController _player;
     private Animator _enemyDestroyAnim;
 
+    private AudioSource _audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<PlayerController>();
         _enemyDestroyAnim = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
 
         if (_player == null)
         {
@@ -26,6 +29,11 @@ public class EnemyController : MonoBehaviour
         if (_enemyDestroyAnim == null)
         {
             Debug.LogError("Animator is null");
+        }
+
+        if (_audioSource == null)
+        {
+            Debug.LogError("Audio Source on enemy is null");
         }
     }
 
@@ -53,6 +61,7 @@ public class EnemyController : MonoBehaviour
             }
 
             _enemyDestroyAnim.SetTrigger("OnEnemyDeath");
+            _audioSource.Play();
             _speed = 0;
             Destroy(this.gameObject, 2.7f);
         }
@@ -66,6 +75,7 @@ public class EnemyController : MonoBehaviour
             }
 
             _enemyDestroyAnim.SetTrigger("OnEnemyDeath");
+            _audioSource.Play();
             _speed = 0;
             Destroy(this.gameObject, 2.7f);
         }

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _shieldsVisualizer;
     [SerializeField] GameObject _leftEngine, _rightEngine;
     [SerializeField] AudioClip _laserSoundClip;
-    [SerializeField] AudioSource _audioSource;
+    private AudioSource _audioSource;
 
     [SerializeField] float _fireRate = 0.5f;
     private float _canFire = -1f;
